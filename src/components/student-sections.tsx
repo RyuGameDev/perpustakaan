@@ -256,10 +256,10 @@ export function StudentHistorySection({ history }: { history: Loan[] }) {
             <tbody>
               {history.map((loan) => (
                 <tr key={loan.id_pinjam}>
-                  <td>{loan.buku?.judul || "-"}</td>
-                  <td>{formatDate(loan.tanggal_pinjam)}</td>
-                  <td>{formatDate(loan.tanggal_jatuh_tempo)}</td>
-                  <td>{formatDate(loan.tanggal_kembali_real)}</td>
+                  <td data-label="Buku">{loan.buku?.judul || "-"}</td>
+                  <td data-label="Tanggal pinjam">{formatDate(loan.tanggal_pinjam)}</td>
+                  <td data-label="Jatuh tempo">{formatDate(loan.tanggal_jatuh_tempo)}</td>
+                  <td data-label="Tanggal kembali">{formatDate(loan.tanggal_kembali_real)}</td>
                 </tr>
               ))}
             </tbody>

@@ -328,13 +328,13 @@ export function MonitoringSection({ loans }: { loans: Loan[] }) {
             <tbody>
               {loans.map((loan) => (
                 <tr key={loan.id_pinjam}>
-                  <td>{loan.mahasiswa?.nama || loan.npm}</td>
-                  <td>{loan.buku?.judul || "-"}</td>
-                  <td>
+                  <td data-label="Anggota">{loan.mahasiswa?.nama || loan.npm}</td>
+                  <td data-label="Buku">{loan.buku?.judul || "-"}</td>
+                  <td data-label="Status">
                     <StatusPill status={loan.status_peminjaman} />
                   </td>
-                  <td>{formatDateTime(loan.created_at)}</td>
-                  <td>{formatDate(loan.tanggal_jatuh_tempo)}</td>
+                  <td data-label="Diajukan">{formatDateTime(loan.created_at)}</td>
+                  <td data-label="Jatuh tempo">{formatDate(loan.tanggal_jatuh_tempo)}</td>
                 </tr>
               ))}
             </tbody>

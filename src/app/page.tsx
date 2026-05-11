@@ -1,4 +1,4 @@
-import { BookOpen, LayoutDashboard, LogIn, MapPin, Search } from "lucide-react";
+import { Bell, BookOpen, CheckCircle2, ClipboardList, LayoutDashboard, LogIn, MapPin, Menu, Search } from "lucide-react";
 import Link from "next/link";
 import { requestLoanAction } from "./actions";
 import { BookCover } from "@/components/book-cover";
@@ -27,7 +27,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             </span>
             <span>Perpustakaan Digital</span>
           </Link>
-          <nav className="nav-actions">
+          <nav className="nav-actions public-nav-desktop">
             {session ? (
               <Link className="button" href={session.role === "admin" ? "/dashboard/admin" : "/dashboard/mahasiswa"}>
                 <LayoutDashboard size={16} />
@@ -45,6 +45,30 @@ export default async function HomePage({ searchParams }: HomePageProps) {
               </>
             )}
           </nav>
+          <details className="public-menu">
+            <summary className="ghost-button">
+              <Menu size={16} />
+              Menu
+            </summary>
+            <div className="public-menu-panel">
+              {session ? (
+                <Link className="button" href={session.role === "admin" ? "/dashboard/admin" : "/dashboard/mahasiswa"}>
+                  <LayoutDashboard size={16} />
+                  Dashboard
+                </Link>
+              ) : (
+                <>
+                  <Link className="ghost-button" href="/register">
+                    Daftar
+                  </Link>
+                  <Link className="button" href="/login">
+                    <LogIn size={16} />
+                    Login
+                  </Link>
+                </>
+              )}
+            </div>
+          </details>
         </div>
       </header>
 
@@ -68,26 +92,65 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             </div>
           </div>
 
-          <div className="hero-media" aria-label="Rak buku perpustakaan">
-            <div className="shelf-scene">
-              <div className="shelf-grid">
-                <div className="book-spine">Pemrograman</div>
-                <div className="book-spine">Database</div>
-                <div className="book-spine">Algoritma</div>
-                <div className="book-spine">Sistem</div>
+          <div className="hero-media" aria-label="Ringkasan layanan perpustakaan">
+            <div className="service-preview">
+              <div className="service-preview-header">
+                <div>
+                  <span className="tag">Layanan Aktif</span>
+                  <h2>Alur Peminjaman</h2>
+                </div>
+                <span className="status-pill status-disetujui">Online</span>
               </div>
-              <div className="shelf-caption">
+              <div className="service-steps">
+                <div className="service-step">
+                  <span className="service-icon">
+                    <Search size={18} />
+                  </span>
+                  <div>
+                    <strong>Cari koleksi</strong>
+                    <small>Temukan buku berdasarkan judul, penulis, kategori, atau ISBN.</small>
+                  </div>
+                </div>
+                <div className="service-step">
+                  <span className="service-icon">
+                    <ClipboardList size={18} />
+                  </span>
+                  <div>
+                    <strong>Ajukan peminjaman</strong>
+                    <small>Pengajuan tercatat dan masuk ke antrian petugas.</small>
+                  </div>
+                </div>
+                <div className="service-step">
+                  <span className="service-icon">
+                    <CheckCircle2 size={18} />
+                  </span>
+                  <div>
+                    <strong>Diproses admin</strong>
+                    <small>Petugas menyetujui, menolak, atau memvalidasi pengembalian.</small>
+                  </div>
+                </div>
+                <div className="service-step">
+                  <span className="service-icon">
+                    <Bell size={18} />
+                  </span>
+                  <div>
+                    <strong>Pantau status</strong>
+                    <small>Perubahan status dan pengingat jatuh tempo tersedia di dashboard.</small>
+                  </div>
+                </div>
+              </div>
+              <div className="service-summary">
                 <div className="mini-stat">
                   <strong>{books.length}</strong>
-                  <span>Buku</span>
+                  <span>Koleksi</span>
                 </div>
                 <div className="mini-stat">
                   <strong>7</strong>
                   <span>Hari pinjam</span>
                 </div>
                 <div className="mini-stat">
-                  <strong>Email</strong>
-                  <span>Notifikasi</span>
+                  <strong>24/7</strong>
+                  <span>Akses katalog</span>
                 </div>
               </div>
             </div>
