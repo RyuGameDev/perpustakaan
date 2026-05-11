@@ -61,6 +61,7 @@ img {
 
 .page {
   min-height: 100vh;
+  padding-top: 72px;
 }
 
 .container {
@@ -69,8 +70,10 @@ img {
 }
 
 .topbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 20;
   background: rgba(245, 247, 251, 0.92);
   border-bottom: 1px solid rgba(219, 226, 234, 0.9);
@@ -608,11 +611,14 @@ h3 {
 .dashboard {
   min-height: 100vh;
   overflow-x: hidden;
+  padding-top: 64px;
 }
 
 .dashboard-topbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 40;
   background: rgba(245, 247, 251, 0.94);
   border-bottom: 1px solid rgba(219, 226, 234, 0.9);
@@ -958,6 +964,10 @@ h3 {
     gap: 10px;
   }
 
+  .page {
+    padding-top: 58px;
+  }
+
   .topbar .brand {
     gap: 10px;
   }
@@ -1022,6 +1032,10 @@ h3 {
 
   .dashboard-topbar-inner {
     min-height: 54px;
+  }
+
+  .dashboard {
+    padding-top: 54px;
   }
 
   .dashboard-menu-panel {
