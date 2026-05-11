@@ -31,15 +31,6 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           <span>Perpustakaan Digital</span>
         </Link>
 
-        <div className="auth-nav">
-          <Link className="ghost-button" href="/">
-            Katalog
-          </Link>
-          <Link className="subtle-button" href="/register">
-            Daftar Anggota
-          </Link>
-        </div>
-
         <h1>Login</h1>
         <p className="lead">Masuk ke dashboard layanan sesuai peran akun Anda.</p>
         <FlashMessage success={params?.success} error={params?.error} />

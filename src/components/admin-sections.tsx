@@ -81,28 +81,34 @@ export function PendingLoansSection({ loans, preview = false }: { loans: Loan[];
                   <span className="tag">Stok {loan.buku?.stok ?? "-"}</span>
                 </div>
               </div>
-              <div className="record-actions">
-                <form className="inline-form" action={approveLoanAction}>
-                  <input type="hidden" name="id_pinjam" value={loan.id_pinjam} />
-                  <input type="hidden" name="redirect_to" value={redirectTo} />
-                  <select className="select" name="durasi" defaultValue="7" aria-label="Durasi peminjaman">
-                    <option value="7">7 hari</option>
-                    <option value="14">14 hari</option>
-                  </select>
-                  <button className="button" type="submit">
-                    <CheckCircle2 size={16} />
-                    Setujui
-                  </button>
-                </form>
-                <form className="inline-form" action={rejectLoanAction}>
-                  <input type="hidden" name="id_pinjam" value={loan.id_pinjam} />
-                  <input type="hidden" name="redirect_to" value={redirectTo} />
-                  <input className="field" name="alasan" placeholder="Catatan penolakan" />
-                  <button className="danger-button" type="submit">
-                    Tolak
-                  </button>
-                </form>
-              </div>
+              {preview ? (
+                <Link className="subtle-button" href="/dashboard/admin/peminjaman">
+                  Proses
+                </Link>
+              ) : (
+                <div className="record-actions">
+                  <form className="inline-form" action={approveLoanAction}>
+                    <input type="hidden" name="id_pinjam" value={loan.id_pinjam} />
+                    <input type="hidden" name="redirect_to" value={redirectTo} />
+                    <select className="select" name="durasi" defaultValue="7" aria-label="Durasi peminjaman">
+                      <option value="7">7 hari</option>
+                      <option value="14">14 hari</option>
+                    </select>
+                    <button className="button" type="submit">
+                      <CheckCircle2 size={16} />
+                      Setujui
+                    </button>
+                  </form>
+                  <form className="inline-form" action={rejectLoanAction}>
+                    <input type="hidden" name="id_pinjam" value={loan.id_pinjam} />
+                    <input type="hidden" name="redirect_to" value={redirectTo} />
+                    <input className="field" name="alasan" placeholder="Catatan penolakan" />
+                    <button className="danger-button" type="submit">
+                      Tolak
+                    </button>
+                  </form>
+                </div>
+              )}
             </article>
           ))}
         </div>
@@ -147,23 +153,29 @@ export function PendingExtensionsSection({ extensions, preview = false }: { exte
                     <span className="tag">Jatuh tempo {formatDate(loan?.tanggal_jatuh_tempo)}</span>
                   </div>
                 </div>
-                <div className="record-actions">
-                  <form action={approveExtensionAction}>
-                    <input type="hidden" name="id_perpanjangan" value={extension.id_perpanjangan} />
-                    <input type="hidden" name="redirect_to" value={redirectTo} />
-                    <button className="button" type="submit">
-                      Setujui
-                    </button>
-                  </form>
-                  <form className="inline-form" action={rejectExtensionAction}>
-                    <input type="hidden" name="id_perpanjangan" value={extension.id_perpanjangan} />
-                    <input type="hidden" name="redirect_to" value={redirectTo} />
-                    <input className="field" name="alasan" placeholder="Catatan penolakan" />
-                    <button className="danger-button" type="submit">
-                      Tolak
-                    </button>
-                  </form>
-                </div>
+                {preview ? (
+                  <Link className="subtle-button" href="/dashboard/admin/perpanjangan">
+                    Proses
+                  </Link>
+                ) : (
+                  <div className="record-actions">
+                    <form action={approveExtensionAction}>
+                      <input type="hidden" name="id_perpanjangan" value={extension.id_perpanjangan} />
+                      <input type="hidden" name="redirect_to" value={redirectTo} />
+                      <button className="button" type="submit">
+                        Setujui
+                      </button>
+                    </form>
+                    <form className="inline-form" action={rejectExtensionAction}>
+                      <input type="hidden" name="id_perpanjangan" value={extension.id_perpanjangan} />
+                      <input type="hidden" name="redirect_to" value={redirectTo} />
+                      <input className="field" name="alasan" placeholder="Catatan penolakan" />
+                      <button className="danger-button" type="submit">
+                        Tolak
+                      </button>
+                    </form>
+                  </div>
+                )}
               </article>
             );
           })}
@@ -205,13 +217,19 @@ export function ReturnsSection({ loans, preview = false }: { loans: Loan[]; prev
                   <StatusPill status={loan.status_peminjaman} />
                 </div>
               </div>
-              <form action={returnLoanAction}>
-                <input type="hidden" name="id_pinjam" value={loan.id_pinjam} />
-                <input type="hidden" name="redirect_to" value={redirectTo} />
-                <button className="subtle-button" type="submit">
-                  Proses Pengembalian
-                </button>
-              </form>
+              {preview ? (
+                <Link className="subtle-button" href="/dashboard/admin/pengembalian">
+                  Proses
+                </Link>
+              ) : (
+                <form action={returnLoanAction}>
+                  <input type="hidden" name="id_pinjam" value={loan.id_pinjam} />
+                  <input type="hidden" name="redirect_to" value={redirectTo} />
+                  <button className="subtle-button" type="submit">
+                    Proses Pengembalian
+                  </button>
+                </form>
+              )}
             </article>
           ))}
         </div>
