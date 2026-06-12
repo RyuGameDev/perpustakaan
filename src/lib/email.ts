@@ -8,8 +8,12 @@ type EmailPayload = {
   message: string;
 };
 
+function emailEnv(key: "HOST" | "PORT" | "SECURE" | "USER" | "PASS" | "FROM") {
+  return process.env[`SMTP_${key}`] || process.env[`EMAIL_${key}`];
+}
+
 function smtpReady() {
-  return Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
+  return Boolean(emailEnv("HOST") && emailEnv("USER") && emailEnv("PASS"));
 }
 
 function escapeHtml(value: string) {
@@ -27,18 +31,21 @@ export async function sendEmail({ to, subject, message }: EmailPayload) {
     return { status: "skipped" as const };
   }
 
+  const port = Number(emailEnv("PORT") || 587);
+  const secureEnv = emailEnv("SECURE");
+
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT || 587),
-    secure: Number(process.env.SMTP_PORT || 587) === 465,
+    host: emailEnv("HOST"),
+    port,
+    secure: secureEnv ? secureEnv === "true" : port === 465,
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS
+      user: emailEnv("USER"),
+      pass: emailEnv("PASS")
     }
   });
 
   await transporter.sendMail({
-    from: process.env.SMTP_FROM || "Perpustakaan Online <noreply@localhost>",
+    from: emailEnv("FROM") || "Perpustakaan Online <noreply@localhost>",
     to,
     subject,
     text: message,
