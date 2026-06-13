@@ -15,10 +15,11 @@ type DashboardShellProps = {
   title: string;
   subtitle: string;
   navItems: NavItem[];
+  actions?: ReactNode;
   children: ReactNode;
 };
 
-export function DashboardShell({ eyebrow, title, subtitle, navItems, children }: DashboardShellProps) {
+export function DashboardShell({ eyebrow, title, subtitle, navItems, actions, children }: DashboardShellProps) {
   return (
     <main className="dashboard">
       <header className="dashboard-topbar">
@@ -62,6 +63,7 @@ export function DashboardShell({ eyebrow, title, subtitle, navItems, children }:
             <h1>{title}</h1>
             <p className="muted">{subtitle}</p>
           </div>
+          {actions ? <div className="main-header-actions">{actions}</div> : null}
         </div>
 
         {children}

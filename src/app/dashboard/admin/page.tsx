@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AdminStats, MonitoringSection, PendingExtensionsSection, PendingLoansSection, ReturnsSection } from "@/components/admin-sections";
 import { DashboardShell } from "@/components/dashboard-shell";
 import { FlashMessage } from "@/components/flash-message";
@@ -24,6 +25,11 @@ export default async function AdminDashboard({ searchParams }: AdminDashboardPro
       title="Ringkasan Operasional"
       subtitle={`${session.name} - pusat kendali layanan perpustakaan`}
       navItems={adminNav("overview")}
+      actions={
+        <Link className="button" href="/dashboard/admin/profil">
+          Edit Profil
+        </Link>
+      }
     >
       <FlashMessage success={params?.success} error={params?.error} />
 

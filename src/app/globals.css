@@ -711,6 +711,13 @@ h3 {
   font-size: 2rem;
 }
 
+.main-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -957,6 +964,16 @@ h3 {
   .record {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .main-header-actions {
+    width: 100%;
+  }
+
+  .main-header-actions .button,
+  .main-header-actions .ghost-button,
+  .main-header-actions .subtle-button {
+    width: 100%;
   }
 
   .topbar-inner {
