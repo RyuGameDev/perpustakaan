@@ -15,6 +15,7 @@ import { formatDate, formatDateTime } from "@/lib/date";
 import type { Admin, Book, Loan, LoanExtension } from "@/lib/types";
 import { BookCover } from "./book-cover";
 import { StatusPill } from "./status-pill";
+import { SubmitButton } from "./submit-button";
 
 export function AdminStats({
   totalBooks,
@@ -72,9 +73,9 @@ export function AdminProfileSection({ admin }: { admin: Admin | null }) {
           <label htmlFor="jabatan">Jabatan</label>
           <input className="field" id="jabatan" name="jabatan" defaultValue={admin?.jabatan || ""} />
         </div>
-        <button className="button" type="submit">
+        <SubmitButton className="button" pendingLabel="Menyimpan...">
           Simpan Profil
-        </button>
+        </SubmitButton>
       </form>
     </section>
   );
@@ -126,18 +127,18 @@ export function PendingLoansSection({ loans, preview = false }: { loans: Loan[];
                       <option value="7">7 hari</option>
                       <option value="14">14 hari</option>
                     </select>
-                    <button className="button" type="submit">
+                    <SubmitButton className="button" pendingLabel="Memproses...">
                       <CheckCircle2 size={16} />
                       Setujui
-                    </button>
+                    </SubmitButton>
                   </form>
                   <form className="inline-form" action={rejectLoanAction}>
                     <input type="hidden" name="id_pinjam" value={loan.id_pinjam} />
                     <input type="hidden" name="redirect_to" value={redirectTo} />
                     <input className="field" name="alasan" placeholder="Catatan penolakan" />
-                    <button className="danger-button" type="submit">
+                    <SubmitButton className="danger-button" pendingLabel="Menolak...">
                       Tolak
-                    </button>
+                    </SubmitButton>
                   </form>
                 </div>
               )}
@@ -194,17 +195,17 @@ export function PendingExtensionsSection({ extensions, preview = false }: { exte
                     <form action={approveExtensionAction}>
                       <input type="hidden" name="id_perpanjangan" value={extension.id_perpanjangan} />
                       <input type="hidden" name="redirect_to" value={redirectTo} />
-                      <button className="button" type="submit">
+                      <SubmitButton className="button" pendingLabel="Memproses...">
                         Setujui
-                      </button>
+                      </SubmitButton>
                     </form>
                     <form className="inline-form" action={rejectExtensionAction}>
                       <input type="hidden" name="id_perpanjangan" value={extension.id_perpanjangan} />
                       <input type="hidden" name="redirect_to" value={redirectTo} />
                       <input className="field" name="alasan" placeholder="Catatan penolakan" />
-                      <button className="danger-button" type="submit">
+                      <SubmitButton className="danger-button" pendingLabel="Menolak...">
                         Tolak
-                      </button>
+                      </SubmitButton>
                     </form>
                   </div>
                 )}
@@ -257,9 +258,9 @@ export function ReturnsSection({ loans, preview = false }: { loans: Loan[]; prev
                 <form action={returnLoanAction}>
                   <input type="hidden" name="id_pinjam" value={loan.id_pinjam} />
                   <input type="hidden" name="redirect_to" value={redirectTo} />
-                  <button className="subtle-button" type="submit">
+                  <SubmitButton className="subtle-button" pendingLabel="Memproses...">
                     Proses Pengembalian
-                  </button>
+                  </SubmitButton>
                 </form>
               )}
             </article>
@@ -293,9 +294,9 @@ export function BookManagementSection({ books }: { books: Book[] }) {
         <input className="field" name="stok" type="number" min="0" placeholder="Stok" />
         <input className="field span-2" name="cover_url" placeholder="URL cover opsional" />
         <input className="field span-2" name="cover" type="file" accept="image/*" />
-        <button className="button span-2" type="submit">
+        <SubmitButton className="button span-2" pendingLabel="Menyimpan...">
           Simpan Buku
-        </button>
+        </SubmitButton>
       </form>
 
       <div className="section-divider" />
@@ -317,16 +318,16 @@ export function BookManagementSection({ books }: { books: Book[] }) {
                 <input className="field" name="lokasi_rak" defaultValue={book.lokasi_rak || ""} />
                 <input className="field" name="stok" type="number" min="0" defaultValue={book.stok} />
                 <input className="field span-2" name="cover" type="file" accept="image/*" />
-                <button className="subtle-button" type="submit">
+                <SubmitButton className="subtle-button" pendingLabel="Menyimpan...">
                   Simpan Perubahan
-                </button>
+                </SubmitButton>
               </form>
               <form action={deleteBookAction}>
                 <input type="hidden" name="id_buku" value={book.id_buku} />
                 <input type="hidden" name="redirect_to" value="/dashboard/admin/buku" />
-                <button className="danger-button" type="submit">
+                <SubmitButton className="danger-button" pendingLabel="Menghapus...">
                   Hapus
-                </button>
+                </SubmitButton>
               </form>
             </div>
           </article>

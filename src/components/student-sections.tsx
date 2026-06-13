@@ -9,6 +9,7 @@ import { formatDate, formatDateTime } from "@/lib/date";
 import type { Book, Loan, Notification, Student } from "@/lib/types";
 import { BookCover } from "./book-cover";
 import { StatusPill } from "./status-pill";
+import { SubmitButton } from "./submit-button";
 
 export function StudentStats({
   activeLoans,
@@ -83,9 +84,9 @@ export function StudentStatusSection({ loans, preview = false }: { loans: Loan[]
                     <option value="7">7 hari</option>
                     <option value="14">14 hari</option>
                   </select>
-                  <button className="subtle-button" type="submit">
+                  <SubmitButton className="subtle-button" pendingLabel="Mengirim...">
                     Ajukan Perpanjangan
-                  </button>
+                  </SubmitButton>
                 </form>
               ) : null}
             </article>
@@ -130,9 +131,9 @@ export function StudentCatalogSection({ books, preview = false }: { books: Book[
             <form action={requestLoanAction}>
               <input type="hidden" name="id_buku" value={book.id_buku} />
               <input type="hidden" name="redirect_to" value={redirectTo} />
-              <button className="button" type="submit" disabled={book.stok <= 0}>
+              <SubmitButton className="button" disabled={book.stok <= 0} pendingLabel="Mengirim...">
                 Ajukan Peminjaman
-              </button>
+              </SubmitButton>
             </form>
           </article>
         ))}
@@ -177,9 +178,9 @@ export function StudentNotificationsSection({
                 <form action={markNotificationReadAction}>
                   <input type="hidden" name="id_notif" value={notification.id_notif} />
                   <input type="hidden" name="redirect_to" value={redirectTo} />
-                  <button className="ghost-button" type="submit">
+                  <SubmitButton className="ghost-button" pendingLabel="Menandai...">
                     Tandai Dibaca
-                  </button>
+                  </SubmitButton>
                 </form>
               ) : (
                 <span className="tag">Dibaca</span>
@@ -225,9 +226,9 @@ export function StudentProfileSection({ student }: { student: Student | null }) 
           <label htmlFor="no_telepon">No. telepon</label>
           <input className="field" id="no_telepon" name="no_telepon" defaultValue={student?.no_telepon || ""} />
         </div>
-        <button className="button" type="submit">
+        <SubmitButton className="button" pendingLabel="Menyimpan...">
           Simpan Profil
-        </button>
+        </SubmitButton>
       </form>
     </section>
   );

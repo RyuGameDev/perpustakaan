@@ -1,13 +1,14 @@
 import { LogOut } from "lucide-react";
 import { logoutAction } from "@/app/actions";
+import { SubmitButton } from "./submit-button";
 
 export function LogoutForm() {
   return (
     <form action={logoutAction}>
-      <button className="ghost-button" type="submit">
+      <SubmitButton className="ghost-button" pendingLabel="Keluar...">
         <LogOut size={16} />
         Keluar
-      </button>
+      </SubmitButton>
     </form>
   );
 }

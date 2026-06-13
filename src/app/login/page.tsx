@@ -2,6 +2,7 @@ import { BookOpen, LogIn } from "lucide-react";
 import Link from "next/link";
 import { loginAction } from "../actions";
 import { FlashMessage } from "@/components/flash-message";
+import { SubmitButton } from "@/components/submit-button";
 import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 
@@ -55,10 +56,10 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             <label htmlFor="password">Password</label>
             <input className="field" id="password" name="password" type="password" placeholder="Masukkan password" />
           </div>
-          <button className="button" type="submit">
+          <SubmitButton className="button" pendingLabel="Masuk...">
             <LogIn size={16} />
             Masuk
-          </button>
+          </SubmitButton>
         </form>
 
         <p className="muted">

@@ -2,6 +2,7 @@ import { Bell, BookOpen, CheckCircle2, ClipboardList, LayoutDashboard, LogIn, Ma
 import Link from "next/link";
 import { requestLoanAction } from "./actions";
 import { BookCover } from "@/components/book-cover";
+import { SubmitButton } from "@/components/submit-button";
 import { getBooks } from "@/lib/queries";
 import { getSession } from "@/lib/session";
 import { isSupabaseConfigured } from "@/lib/supabase";
@@ -173,10 +174,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             </div>
             <form className="search-form" action="/">
               <input className="field" name="q" defaultValue={search} placeholder="Cari judul, penulis, kategori, ISBN" />
-              <button className="button" type="submit">
+              <SubmitButton className="button" pendingLabel="Mencari...">
                 <Search size={16} />
                 Cari
-              </button>
+              </SubmitButton>
             </form>
           </div>
 
@@ -196,9 +197,9 @@ export default async function HomePage({ searchParams }: HomePageProps) {
                 {session?.role === "mahasiswa" ? (
                   <form action={requestLoanAction}>
                     <input type="hidden" name="id_buku" value={book.id_buku} />
-                    <button className="button" type="submit" disabled={book.stok <= 0}>
+                    <SubmitButton className="button" disabled={book.stok <= 0} pendingLabel="Mengirim...">
                       Ajukan Peminjaman
-                    </button>
+                    </SubmitButton>
                   </form>
                 ) : (
                   <Link className="ghost-button" href="/login">

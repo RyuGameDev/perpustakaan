@@ -54,6 +54,11 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -176,6 +181,13 @@ img {
   transform: translateY(-1px);
 }
 
+.button:disabled:hover,
+.ghost-button:disabled:hover,
+.subtle-button:disabled:hover,
+.danger-button:disabled:hover {
+  transform: none;
+}
+
 .ghost-button {
   color: var(--ink);
   background: var(--surface);
@@ -196,6 +208,16 @@ img {
 .danger-button {
   color: #fff;
   background: var(--danger);
+}
+
+.spin-icon {
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .hero-band {

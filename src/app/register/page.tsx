@@ -2,6 +2,7 @@ import { BookOpen, UserPlus } from "lucide-react";
 import Link from "next/link";
 import { registerStudentAction } from "../actions";
 import { FlashMessage } from "@/components/flash-message";
+import { SubmitButton } from "@/components/submit-button";
 
 type RegisterPageProps = {
   searchParams?: Promise<{
@@ -60,10 +61,10 @@ export default async function RegisterPage({ searchParams }: RegisterPageProps) 
             <label htmlFor="no_telepon">No. telepon</label>
             <input className="field" id="no_telepon" name="no_telepon" placeholder="081234567890" />
           </div>
-          <button className="button" type="submit">
+          <SubmitButton className="button" pendingLabel="Mendaftar...">
             <UserPlus size={16} />
             Daftar
-          </button>
+          </SubmitButton>
         </form>
 
         <p className="muted">
