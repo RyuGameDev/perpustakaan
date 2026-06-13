@@ -206,6 +206,53 @@ export async function updateProfileAction(formData: FormData) {
   redirect(nextPath);
 }
 
+export async function updateAdminProfileAction(formData: FormData) {
+  const session = await requireSession("admin");
+  let nextPath = redirectTarget(formData, "/dashboard/admin/profil");
+
+  try {
+    if (!session.id_admin) {
+      throw new Error("Session admin tidak valid. Silakan login ulang.");
+    }
+
+    const namaAdmin = text(formData, "nama_admin");
+    const emailAdmin = text(formData, "email_admin").toLowerCase();
+    const jabatan = text(formData, "jabatan");
+
+    if (!namaAdmin || !emailAdmin) {
+      throw new Error("Nama dan email admin wajib diisi.");
+    }
+
+    const supabase = getSupabaseAdmin();
+    const { error } = await supabase
+      .from("admin")
+      .update({
+        nama_admin: namaAdmin,
+        email_admin: emailAdmin,
+        jabatan: jabatan || null
+      })
+      .eq("id_admin", session.id_admin);
+
+    if (error) {
+      throw error;
+    }
+
+    await setSession({
+      role: "admin",
+      id: String(session.id_admin),
+      id_admin: session.id_admin,
+      name: namaAdmin,
+      email: emailAdmin
+    });
+
+    nextPath = redirectWith(nextPath, "success", "Profil admin berhasil diperbarui.");
+  } catch (error) {
+    nextPath = redirectWith(nextPath, "error", messageFromError(error));
+  }
+
+  redirect(nextPath);
+}
+
 export async function requestLoanAction(formData: FormData) {
   const session = await requireSession("mahasiswa");
   let nextPath = redirectTarget(formData, "/dashboard/mahasiswa/katalog");

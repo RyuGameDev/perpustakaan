@@ -20,7 +20,8 @@ export function adminNav(active: string) {
     { href: "/dashboard/admin/perpanjangan", label: "Perpanjangan", icon: <RefreshCw size={16} />, key: "perpanjangan" },
     { href: "/dashboard/admin/pengembalian", label: "Pengembalian", icon: <RotateCcw size={16} />, key: "pengembalian" },
     { href: "/dashboard/admin/buku", label: "Data Buku", icon: <BookMarked size={16} />, key: "buku" },
-    { href: "/dashboard/admin/monitoring", label: "Monitoring", icon: <Settings2 size={16} />, key: "monitoring" }
+    { href: "/dashboard/admin/monitoring", label: "Monitoring", icon: <Settings2 size={16} />, key: "monitoring" },
+    { href: "/dashboard/admin/profil", label: "Profil", icon: <UserRound size={16} />, key: "profil" }
   ];
 
   return items.map((item) => ({ ...item, active: item.key === active }));

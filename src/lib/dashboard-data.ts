@@ -3,7 +3,7 @@ import "server-only";
 import { isMissingSchemaError } from "./errors";
 import { getAdminDashboard, getStudentDashboard } from "./queries";
 import { getSupabaseAdmin } from "./supabase";
-import type { Student } from "./types";
+import type { Admin, Student } from "./types";
 
 export async function getSafeAdminDashboard() {
   try {
@@ -18,6 +18,32 @@ export async function getSafeAdminDashboard() {
 
     return {
       dashboard: null,
+      setupError: true
+    };
+  }
+}
+
+export async function getSafeAdminProfile(idAdmin: number) {
+  const supabase = getSupabaseAdmin();
+
+  try {
+    const { data } = await supabase
+      .from("admin")
+      .select("id_admin, nama_admin, email_admin, jabatan")
+      .eq("id_admin", idAdmin)
+      .single();
+
+    return {
+      profile: (data || null) as Admin | null,
+      setupError: false
+    };
+  } catch (error) {
+    if (!isMissingSchemaError(error)) {
+      throw error;
+    }
+
+    return {
+      profile: null,
       setupError: true
     };
   }

@@ -8,10 +8,11 @@ import {
   rejectExtensionAction,
   rejectLoanAction,
   returnLoanAction,
+  updateAdminProfileAction,
   updateBookAction
 } from "@/app/actions";
 import { formatDate, formatDateTime } from "@/lib/date";
-import type { Book, Loan, LoanExtension } from "@/lib/types";
+import type { Admin, Book, Loan, LoanExtension } from "@/lib/types";
 import { BookCover } from "./book-cover";
 import { StatusPill } from "./status-pill";
 
@@ -45,6 +46,37 @@ export function AdminStats({
         <strong>{pendingLoans}</strong>
       </Link>
     </div>
+  );
+}
+
+export function AdminProfileSection({ admin }: { admin: Admin | null }) {
+  return (
+    <section className="panel">
+      <div className="panel-header">
+        <div>
+          <h2>Profil Admin</h2>
+          <p className="muted">Perbarui identitas petugas yang tampil di dashboard dan email operasional.</p>
+        </div>
+      </div>
+      <form className="form-stack" action={updateAdminProfileAction}>
+        <input type="hidden" name="redirect_to" value="/dashboard/admin/profil" />
+        <div className="field-group">
+          <label htmlFor="nama_admin">Nama</label>
+          <input className="field" id="nama_admin" name="nama_admin" defaultValue={admin?.nama_admin || ""} />
+        </div>
+        <div className="field-group">
+          <label htmlFor="email_admin">Email</label>
+          <input className="field" id="email_admin" name="email_admin" type="email" defaultValue={admin?.email_admin || ""} />
+        </div>
+        <div className="field-group">
+          <label htmlFor="jabatan">Jabatan</label>
+          <input className="field" id="jabatan" name="jabatan" defaultValue={admin?.jabatan || ""} />
+        </div>
+        <button className="button" type="submit">
+          Simpan Profil
+        </button>
+      </form>
+    </section>
   );
 }
 
