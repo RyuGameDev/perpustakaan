@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
+    "test": "npm run typecheck",
+    "test:flow": "node scripts/e2e-flow.mjs",
     "typecheck": "tsc --noEmit",
     "hash-password": "node scripts/hash-password.mjs"
   },
@@ -15,7 +17,8 @@
     "next": "^16.2.6",
     "nodemailer": "^6.9.16",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "sweetalert2": "^11.26.25"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
