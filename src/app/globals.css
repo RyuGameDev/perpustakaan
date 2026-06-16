@@ -568,6 +568,16 @@ h3 {
   padding: 28px;
 }
 
+.auth-card p a {
+  color: #0066cc;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.auth-card p a:hover {
+  color: #004499;
+}
+
 .auth-card .brand {
   margin-bottom: 24px;
 }
